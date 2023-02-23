@@ -1,3 +1,4 @@
+using ConnectionService.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConnectionService.Controllers;
@@ -28,5 +29,22 @@ public class WeatherForecastController : ControllerBase
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+    }
+    
+    
+    //Unsafe login
+    [HttpPost]
+    public ActionResult<LoginDTO> PostLogin([FromBody]LoginDTO loginDto)
+    {
+        if (loginDto == null)
+            return BadRequest();
+        var login = new Login
+        {
+            username = loginDto.username,
+            password = loginDto.password
+        };
+        return StatusCode(200);
+
+        //CreatedAtAction(nameof(Login), new {username = loginDto.username, password = loginDto.password}, LoginDTO(login));
     }
 }
