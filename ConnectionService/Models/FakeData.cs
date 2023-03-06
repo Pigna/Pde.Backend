@@ -1,4 +1,4 @@
-namespace ConnectionService.Controllers;
+namespace ConnectionService.Models;
 
 public class FakeData
 {

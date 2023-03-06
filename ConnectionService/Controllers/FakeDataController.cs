@@ -1,3 +1,4 @@
+using ConnectionService.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConnectionService.Controllers;

@@ -1,14 +1,12 @@
 using ConnectionService.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace ConnectionService.Contexts;
 
-public class EfDbContext : DbContext
+public class EfDbContext 
 {
     
-    public DbSet<TableInfo> TableInfos { get; set; }
-    public DbSet<ColumnInfo> ColumnInfos { get; set; }
-    
+    /*public DbSet<TableInfo> TableInfos { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (optionsBuilder.IsConfigured) return;
@@ -16,7 +14,7 @@ public class EfDbContext : DbContext
         optionsBuilder.UseNpgsql(connectionString);
         Console.Out.WriteLine("DB connect done");
     }
-    
+    */
     
     
 }

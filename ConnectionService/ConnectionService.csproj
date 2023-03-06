@@ -9,12 +9,8 @@
 
     <ItemGroup>
         <PackageReference Include="Faker.Net" Version="2.0.154" />
-        <PackageReference Include="Microsoft.AspNetCore.Metadata" Version="8.0.0-preview.1.23112.2" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0-preview.1.23111.4" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.0-preview.1.23111.4" />
         <PackageReference Include="Npgsql" Version="7.0.2" />
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
