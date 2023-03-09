@@ -4,5 +4,5 @@ namespace ConnectionService.Database;
 
 public interface IDbConnectionFactory
 {
-    IDbConnection Connect();
+    IDbConnection Connect(String connectionString);
 }

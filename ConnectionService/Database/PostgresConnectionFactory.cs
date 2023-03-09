@@ -5,20 +5,13 @@ namespace ConnectionService.Database;
 
 public class PostgresConnectionFactory : IDbConnectionFactory
 {
-    private readonly string _connectionString;
-
     public PostgresConnectionFactory()
     {
-        _connectionString = "User ID=postgres;Password=postgrespw;Host=localhost;Port=32768;Database=postgres;";
+        
     }
 
-    public PostgresConnectionFactory(string connectionString)
+    public IDbConnection Connect(string connectionString)
     {
-        _connectionString = connectionString;
-    }
-
-    public IDbConnection Connect()
-    {
-        return new NpgsqlConnection(_connectionString);
+        return new NpgsqlConnection(connectionString);
     }
 }
