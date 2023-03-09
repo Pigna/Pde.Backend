@@ -1,4 +1,3 @@
-using ConnectionService.Contexts;
 using ConnectionService.Database;
 using ConnectionService.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +20,7 @@ public class DatabaseController : ControllerBase
     {
         var tables = new List<TableInfo>() { };
         tables.AddRange(_provider.GetTablesAndColumns().Result.ToList());
-        return tables;
+        return Ok(tables);
         
     }
 }
