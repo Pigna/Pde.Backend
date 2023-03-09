@@ -1,4 +1,5 @@
 using ConnectionService.Contexts;
+using ConnectionService.Database;
 using ConnectionService.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,22 +9,18 @@ namespace ConnectionService.Controllers;
 [Route("[controller]")]
 public class DatabaseController : ControllerBase
 {
-
-    private readonly ILogger<WeatherForecastController> _logger;
-
-    public DatabaseController(ILogger<WeatherForecastController> logger)
+    private readonly IDbSchemaProvider _provider;
+    
+    public DatabaseController (IDbSchemaProvider provider)
     {
-        _logger = logger;
+        _provider = provider;
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TableInfo>>> GetTables()
     {
         var tables = new List<TableInfo>() { };
-        foreach (var table in tables)
-        {
-            Console.Out.WriteLine(table.Name);
-        }
+        tables.AddRange(_provider.GetTablesAndColumns().Result.ToList());
         return tables;
         
     }

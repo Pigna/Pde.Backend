@@ -1,6 +1,12 @@
+using ConnectionService.Database;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddRazorPages();
+builder.Services.AddScoped<IDbConnectionFactory, PostgresConnectionFactory>();
+//builder.Services.AddHostedService<DatabaseController>().AddScoped<IDbSchemaProvider, PostgreSQLSchemaProvider>();
+builder.Services.AddScoped<IDbSchemaProvider, PostgresSchemaProvider>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
