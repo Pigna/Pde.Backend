@@ -1,8 +1,8 @@
 namespace ConnectionService.Models;
 
-public class ConnectionInfo
+public class DatabaseInfo
 {
-    public ConnectionInfo(string username, string password, string host, string port, string database)
+    public DatabaseInfo(string username, string password, string host, string port, string database)
     {
         Username = username;
         Password = password;

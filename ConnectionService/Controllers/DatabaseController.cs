@@ -1,7 +1,6 @@
-using ConnectionService.Database;
+using ConnectionService.Logic;
 using ConnectionService.Models;
 using Microsoft.AspNetCore.Mvc;
-using ConnectionInfo = ConnectionService.Models.ConnectionInfo;
 
 namespace ConnectionService.Controllers;
 
@@ -9,20 +8,18 @@ namespace ConnectionService.Controllers;
 [Route("[controller]")]
 public class DatabaseController : ControllerBase
 {
-    private readonly IDbSchemaProvider _provider;
-    
-    public DatabaseController (IDbSchemaProvider provider)
+    private readonly ITableInfoLogic _tableInfoLogic;
+
+    public DatabaseController(ITableInfoLogic tableInfoLogic)
     {
-        _provider = provider;
+        _tableInfoLogic = tableInfoLogic;
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TableInfo>>> GetTables()
     {
-        var info = new ConnectionInfo("postgres", "postgrespw", "localhost", "32768", "postgres");
-        var tables = new List<TableInfo>() { };
-        tables.AddRange(_provider.GetTablesAndColumns(info).Result.ToList());
-        return Ok(tables);
-        
+        //TODO: Get this information from header? or create session?
+        var databaseInfo = new DatabaseInfo("postgres", "postgrespw", "localhost", "32768", "postgres");
+        return Ok(_tableInfoLogic.GetTableInfo(databaseInfo));
     }
 }

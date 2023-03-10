@@ -1,10 +1,12 @@
 using ConnectionService.Database;
+using ConnectionService.Logic;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+builder.Services.AddScoped<ITableInfoLogic, TableInfoLogic>();
 builder.Services.AddScoped<IDbSchemaProvider, PostgresSchemaProvider>();
 builder.Services.AddScoped<IDbConnectionFactory, PostgresConnectionFactory>();
 

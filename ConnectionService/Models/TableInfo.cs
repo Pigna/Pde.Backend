@@ -1,4 +1,5 @@
 namespace ConnectionService.Models;
+
 public class TableInfo
 {
     public string Name { get; set; }
