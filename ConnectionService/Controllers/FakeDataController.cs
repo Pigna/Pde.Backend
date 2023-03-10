@@ -19,7 +19,7 @@ public class FakeDataController : ControllerBase
     {
         return new FakeData()
         {
-            value = Faker.Name.First()
+            Value = Faker.Name.First()
         };
     }
 }

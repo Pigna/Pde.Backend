@@ -2,5 +2,5 @@ namespace ConnectionService.Models;
 
 public class FakeData
 {
-    public string value { get; set; }
+    public string Value { get; set; } = null!;
 }

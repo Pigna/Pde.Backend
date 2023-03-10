@@ -19,7 +19,14 @@ public class DatabaseController : ControllerBase
     public async Task<ActionResult<IEnumerable<TableInfo>>> GetTables()
     {
         //TODO: Get this information from header? or create session?
-        var databaseInfo = new DatabaseInfo("postgres", "postgrespw", "localhost", "32768", "postgres");
+        var databaseInfo = new DatabaseInfo()
+        {
+            Username = "postgres",
+            Password = "postgrespw",
+            Host = "localhost",
+            Port = "32768",
+            Database = "postgres"
+        };
         return Ok(_tableInfoLogic.GetTableInfo(databaseInfo));
     }
 }
