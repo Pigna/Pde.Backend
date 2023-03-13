@@ -1,6 +1,6 @@
-using Pde.Backend.Api.Models;
+using Pde.Backend.Core.TableInfos.Models;
 
-namespace PDE_Backend.Core.TableInfos.Contracts;
+namespace Pde.Backend.Core.TableInfos.Contracts;
 
 public class FetchDatabaseStructureResponse
 {

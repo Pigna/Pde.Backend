@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Pde.Backend.Api.Logic;
-using Pde.Backend.Api.Models;
+using Pde.Backend.Core.TableInfos.Models;
+using Pde.Backend.Core.TableInfos.Services;
 
 namespace Pde.Backend.Api.Controllers;
 
@@ -8,9 +8,9 @@ namespace Pde.Backend.Api.Controllers;
 [Route("[controller]")]
 public class DatabaseController : ControllerBase
 {
-    private readonly ITableInfoLogic _tableInfoLogic;
+    private readonly ITableInfoService _tableInfoLogic;
 
-    public DatabaseController(ITableInfoLogic tableInfoLogic)
+    public DatabaseController(ITableInfoService tableInfoLogic)
     {
         _tableInfoLogic = tableInfoLogic;
     }
@@ -18,7 +18,7 @@ public class DatabaseController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetTables()
     {
-        //TODO: Get this information from header? or create session?
+        //TODO: Get this information from header? or recreate to post
         var databaseInfo = new DatabaseInfo()
         {
             Username = "postgres",

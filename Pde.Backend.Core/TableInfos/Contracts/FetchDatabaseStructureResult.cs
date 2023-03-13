@@ -1,4 +1,4 @@
-namespace PDE_Backend.Core.TableInfos.Contracts;
+namespace Pde.Backend.Core.TableInfos.Contracts;
 
 public enum FetchDatabaseStructureResult
 {

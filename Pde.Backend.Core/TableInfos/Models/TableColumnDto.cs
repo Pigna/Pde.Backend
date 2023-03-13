@@ -1,4 +1,4 @@
-namespace Pde.Backend.Api.Models;
+namespace Pde.Backend.Core.TableInfos.Models;
 
 public class TableColumnDto
 {

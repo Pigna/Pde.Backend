@@ -1,6 +1,4 @@
-﻿using PDE_Backend.Core.TableInfos.Services;
-using PDE_Backend.Core.TableInfos.Services.Implementations;
-using Pde.Backend.Core.Extensions;
+﻿using Pde.Backend.Core.Extensions;
 
 namespace Pde.Backend.Api.Extensions;
 
@@ -10,9 +8,9 @@ public static class ServiceCollectionExtensions
     {
         services.AddRazorPages();
 
-        services.AddScoped<ITableInfoLogic, TableInfoLogic>();
+        /*services.AddScoped<ITableInfoLogic, TableInfoLogic>();
         services.AddScoped<IDbSchemaProvider, PostgresSchemaProvider>();
-        services.AddScoped<IDbConnectionFactory, PostgresConnectionFactory>();
+        services.AddScoped<IDbConnectionFactory, PostgresConnectionFactory>();*/
 
         services.AddControllers();
         services.AddEndpointsApiExplorer();

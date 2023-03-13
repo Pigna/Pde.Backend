@@ -1,7 +1,4 @@
-using Pde.Backend.Api.Database;
 using Pde.Backend.Api.Extensions;
-using Pde.Backend.Api.Logic;
-using Pde.Backend.Core.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

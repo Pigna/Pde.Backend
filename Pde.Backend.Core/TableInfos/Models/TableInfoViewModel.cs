@@ -1,10 +1,10 @@
 using System.Collections.ObjectModel;
 
-namespace Pde.Backend.Api.Models;
+namespace Pde.Backend.Core.TableInfos.Models;
 
 public class TableInfoViewModel
 {
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
-    public Collection<ColumnInfoViewModel> Columns { get; set; }
+    public Collection<ColumnInfoViewModel> Columns { get; set; } = null!;
 }

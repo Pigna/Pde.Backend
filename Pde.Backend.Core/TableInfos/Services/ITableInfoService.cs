@@ -1,6 +1,8 @@
-namespace PDE_Backend.Core.TableInfos.Services;
+using Pde.Backend.Core.TableInfos.Models;
 
-public class ITableInfoService
+namespace Pde.Backend.Core.TableInfos.Services;
+
+public interface ITableInfoService
 {
-    
+    List<TableInfoViewModel> GetTableInfo(DatabaseInfoViewModel databaseInfo);
 }

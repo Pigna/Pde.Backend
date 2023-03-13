@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PDE_Backend.Core.TableInfos.Services;
-using PDE_Backend.Core.TableInfos.Services.Implementations;
+using Pde.Backend.Core.TableInfos.Services;
+using Pde.Backend.Core.TableInfos.Services.Implementations;
 
 namespace Pde.Backend.Core.Extensions;
 
