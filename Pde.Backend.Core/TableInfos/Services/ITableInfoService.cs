@@ -4,5 +4,5 @@ namespace Pde.Backend.Core.TableInfos.Services;
 
 public interface ITableInfoService
 {
-    List<TableInfoViewModel> GetTableInfo(DatabaseInfoViewModel databaseInfo);
+    List<TableInfoViewModel> GetTableInfo(DatabaseInfo databaseInfo);
 }

@@ -1,5 +1,3 @@
-using Pde.Backend.Api.Models;
-
 namespace Pde.Backend.Data.Database;
 
 public interface IDbSchemaProvider

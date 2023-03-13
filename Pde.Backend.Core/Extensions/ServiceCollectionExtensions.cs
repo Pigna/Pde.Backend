@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Pde.Backend.Core.TableInfos.Services;
 using Pde.Backend.Core.TableInfos.Services.Implementations;
+using Pde.Backend.Data.Extensions;
 
 namespace Pde.Backend.Core.Extensions;
 
@@ -15,6 +16,6 @@ public static class ServiceCollectionExtensions
 
     private static void AddDependencies(this IServiceCollection services, IConfiguration configuration)
     {
-        
+        services.AddPdeBackendDataServices(configuration);
     }
 }

@@ -8,11 +8,11 @@ namespace Pde.Backend.Api.Controllers;
 [Route("[controller]")]
 public class DatabaseController : ControllerBase
 {
-    private readonly ITableInfoService _tableInfoLogic;
+    private readonly ITableInfoService _tableInfoService;
 
-    public DatabaseController(ITableInfoService tableInfoLogic)
+    public DatabaseController(ITableInfoService tableInfoService)
     {
-        _tableInfoLogic = tableInfoLogic;
+        _tableInfoService = tableInfoService;
     }
 
     [HttpGet]
@@ -27,6 +27,6 @@ public class DatabaseController : ControllerBase
             Port = "32768",
             Database = "postgres"
         };
-        return Ok(_tableInfoLogic.GetTableInfo(databaseInfo));
+        return Ok(_tableInfoService.GetTableInfo(databaseInfo));
     }
 }

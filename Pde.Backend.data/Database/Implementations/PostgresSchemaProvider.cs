@@ -1,7 +1,6 @@
 using Dapper;
-using Pde.Backend.Api.Models;
 
-namespace Pde.Backend.Data.Database;
+namespace Pde.Backend.Data.Database.Implementations;
 
 public class PostgresSchemaProvider : IDbSchemaProvider
 {

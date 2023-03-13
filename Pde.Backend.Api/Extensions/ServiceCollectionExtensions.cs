@@ -8,10 +8,6 @@ public static class ServiceCollectionExtensions
     {
         services.AddRazorPages();
 
-        /*services.AddScoped<ITableInfoLogic, TableInfoLogic>();
-        services.AddScoped<IDbSchemaProvider, PostgresSchemaProvider>();
-        services.AddScoped<IDbConnectionFactory, PostgresConnectionFactory>();*/
-
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
