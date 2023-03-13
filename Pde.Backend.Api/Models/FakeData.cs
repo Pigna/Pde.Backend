@@ -1,4 +1,4 @@
-namespace ConnectionService.Models;
+namespace Pde.Backend.Api.Models;
 
 public class FakeData
 {

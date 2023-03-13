@@ -1,7 +1,7 @@
-using ConnectionService.Models;
 using Microsoft.AspNetCore.Mvc;
+using Pde.Backend.Api.Models;
 
-namespace ConnectionService.Controllers;
+namespace Pde.Backend.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]

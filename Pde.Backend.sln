@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pde.Backend.Api", "Pde.Backend.Api\Pde.Backend.Api.csproj", "{7E5DAD70-E0D9-4F50-A8AB-CB0266F04CBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pde.Backend.Core", "Pde.Backend.Core\Pde.Backend.Core.csproj", "{7F7BBDD7-CD92-472B-B171-755C8B2CF0E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pde.Backend.Data", "Pde.Backend.Data\Pde.Backend.Data.csproj", "{071FEC59-F824-43FC-BC5E-E1C60B843DF9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7E5DAD70-E0D9-4F50-A8AB-CB0266F04CBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E5DAD70-E0D9-4F50-A8AB-CB0266F04CBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E5DAD70-E0D9-4F50-A8AB-CB0266F04CBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E5DAD70-E0D9-4F50-A8AB-CB0266F04CBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{071FEC59-F824-43FC-BC5E-E1C60B843DF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{071FEC59-F824-43FC-BC5E-E1C60B843DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{071FEC59-F824-43FC-BC5E-E1C60B843DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{071FEC59-F824-43FC-BC5E-E1C60B843DF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F7BBDD7-CD92-472B-B171-755C8B2CF0E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F7BBDD7-CD92-472B-B171-755C8B2CF0E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F7BBDD7-CD92-472B-B171-755C8B2CF0E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F7BBDD7-CD92-472B-B171-755C8B2CF0E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

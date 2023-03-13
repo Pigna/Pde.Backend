@@ -1,7 +1,7 @@
-using ConnectionService.Database;
-using ConnectionService.Models;
+using Pde.Backend.Api.Database;
+using Pde.Backend.Api.Models;
 
-namespace ConnectionService.Logic;
+namespace Pde.Backend.Core.Logic;
 
 public class TableInfoLogic : ITableInfoLogic
 {

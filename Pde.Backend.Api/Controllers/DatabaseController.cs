@@ -1,8 +1,8 @@
-using ConnectionService.Logic;
-using ConnectionService.Models;
 using Microsoft.AspNetCore.Mvc;
+using Pde.Backend.Api.Logic;
+using Pde.Backend.Api.Models;
 
-namespace ConnectionService.Controllers;
+namespace Pde.Backend.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -16,7 +16,7 @@ public class DatabaseController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<TableInfo>>> GetTables()
+    public async Task<IActionResult> GetTables()
     {
         //TODO: Get this information from header? or create session?
         var databaseInfo = new DatabaseInfo()

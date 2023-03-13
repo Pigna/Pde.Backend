@@ -1,6 +1,6 @@
-using ConnectionService.Models;
+using Pde.Backend.Api.Models;
 
-namespace ConnectionService.Database;
+namespace Pde.Backend.Data.Database;
 
 public interface IDbSchemaProvider
 {

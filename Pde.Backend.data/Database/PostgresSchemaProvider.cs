@@ -1,7 +1,7 @@
-using ConnectionService.Models;
 using Dapper;
+using Pde.Backend.Api.Models;
 
-namespace ConnectionService.Database;
+namespace Pde.Backend.Data.Database;
 
 public class PostgresSchemaProvider : IDbSchemaProvider
 {
