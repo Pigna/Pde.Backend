@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Pde.Backend.Core.TableInfos.Models;
+using Pde.Backend.Core.TableInfos.Contracts;
 using Pde.Backend.Core.TableInfos.Services;
 
 namespace Pde.Backend.Api.Controllers;
@@ -15,18 +15,10 @@ public class DatabaseController : ControllerBase
         _tableInfoService = tableInfoService;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetTables()
+    [HttpPost]
+    public async Task<IActionResult> FetchTables([FromBody] FetchDatabaseStructureRequest request,
+        CancellationToken cancellationToken)
     {
-        //TODO: Get this information from header? or recreate to post
-        var databaseInfo = new DatabaseInfo()
-        {
-            Username = "postgres",
-            Password = "postgrespw",
-            Host = "localhost",
-            Port = "32768",
-            Database = "postgres"
-        };
-        return Ok(_tableInfoService.GetTableInfo(databaseInfo));
+        return Ok(_tableInfoService.FetchDatabaseStructure(request));
     }
 }

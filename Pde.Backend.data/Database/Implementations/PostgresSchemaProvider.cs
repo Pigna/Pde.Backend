@@ -1,15 +1,15 @@
 using Dapper;
+using Pde.Backend.Data.Models;
 
 namespace Pde.Backend.Data.Database.Implementations;
 
 public class PostgresSchemaProvider : IDbSchemaProvider
 {
-    private readonly IDbConnectionFactory _connectionFactory;
-
     private const string StrPostgresCommand = @"
         SELECT 
             table_name,
-            column_name
+            column_name,
+            data_type
         FROM 
             information_schema.columns
         WHERE 
@@ -19,26 +19,30 @@ public class PostgresSchemaProvider : IDbSchemaProvider
             ordinal_position;
     ";
 
+    private readonly IDbConnectionFactory _connectionFactory;
+
     public PostgresSchemaProvider(IDbConnectionFactory connectionFactory)
     {
         _connectionFactory = connectionFactory;
     }
 
-    public async Task<IEnumerable<TableColumnDto>> GetTablesAndColumns(DatabaseInfo databaseInfo)
+    public async Task<IEnumerable<TableColumnInfo>> FetchTablesAndColumns(string username, string password, string host,
+        string port, string database)
     {
         var connectionString = $@"
-            User ID={databaseInfo.Username};
-            Password={databaseInfo.Password};
-            Host={databaseInfo.Host};
-            Port={databaseInfo.Port};
-            Database={databaseInfo.Database};
+            User ID={username};
+            Password={password};
+            Host={host};
+            Port={port};
+            Database={database};
         ";
-        using var database = _connectionFactory.Connect(connectionString);
-        var queryResult = await database.QueryAsync<dynamic>(StrPostgresCommand);
-        return queryResult.Select(item => new TableColumnDto()
+        using var databaseConnection = _connectionFactory.Connect(connectionString);
+        var queryResult = await databaseConnection.QueryAsync<dynamic>(StrPostgresCommand);
+        return queryResult.Select(item => new TableColumnInfo
         {
             TableName = item.table_name,
-            ColumnName = item.column_name
-        }).ToList();
+            ColumnName = item.column_name,
+            DataType = item.data_type
+        });
     }
 }

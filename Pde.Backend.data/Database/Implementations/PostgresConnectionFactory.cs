@@ -1,4 +1,5 @@
 using System.Data;
+using Npgsql;
 
 namespace Pde.Backend.Data.Database.Implementations;
 

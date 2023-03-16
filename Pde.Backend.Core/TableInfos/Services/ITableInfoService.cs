@@ -1,8 +1,8 @@
-using Pde.Backend.Core.TableInfos.Models;
+using Pde.Backend.Core.TableInfos.Contracts;
 
 namespace Pde.Backend.Core.TableInfos.Services;
 
 public interface ITableInfoService
 {
-    List<TableInfoViewModel> GetTableInfo(DatabaseInfo databaseInfo);
+    FetchDatabaseStructureResponse FetchDatabaseStructure(FetchDatabaseStructureRequest databaseConnectionInfo);
 }
