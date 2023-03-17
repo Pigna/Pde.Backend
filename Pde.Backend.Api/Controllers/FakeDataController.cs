@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Pde.Backend.Api.Models;
+using Pde.Backend.Core.TableInfos.Contracts;
+using Pde.Backend.Core.TableInfos.Services;
 
 namespace Pde.Backend.Api.Controllers;
 
@@ -7,19 +8,17 @@ namespace Pde.Backend.Api.Controllers;
 [Route("[controller]")]
 public class FakeDataController : ControllerBase
 {
-    private readonly ILogger<FakeDataController> _logger;
+    private readonly IFakeDataService _fakeDataService;
 
-    public FakeDataController(ILogger<FakeDataController> logger)
+    public FakeDataController(IFakeDataService fakeDataService)
     {
-        _logger = logger;
+        _fakeDataService = fakeDataService;
     }
 
-    [HttpGet(Name = "FakeData")]
-    public FakeData Get()
+    [HttpPost]
+    public async Task<OkObjectResult> FetchFakeData([FromBody] FetchFakeDataRequest request,
+        CancellationToken cancellationToken)
     {
-        return new FakeData()
-        {
-            Value = Faker.Name.First()
-        };
+        return Ok(_fakeDataService.FetchFakeData(request));
     }
 }

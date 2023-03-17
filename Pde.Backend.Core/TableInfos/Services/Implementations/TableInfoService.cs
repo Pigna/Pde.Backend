@@ -57,6 +57,11 @@ public class TableInfoService : ITableInfoService
         }
     }
 
+    /// <summary>
+    ///     Loop over the database results and parse to a TableInfoViewModel collection
+    /// </summary>
+    /// <param name="tableColumnList">List of TableColumnInfo filled with data from the database</param>
+    /// <returns>A mapped object of TableInfo</returns>
     private static Collection<TableInfoViewModel> MapToCollection(List<TableColumnInfo> tableColumnList)
     {
         var tableInfoList = new Collection<TableInfoViewModel>();

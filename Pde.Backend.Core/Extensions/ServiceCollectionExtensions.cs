@@ -11,6 +11,7 @@ public static class ServiceCollectionExtensions
     public static void AddPdeBackendCoreServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddTransient<ITableInfoService, TableInfoService>();
+        services.AddTransient<IFakeDataService, FakeDataService>();
         services.AddDependencies(configuration);
     }
 
