@@ -25,6 +25,7 @@ public class TableInfoService : ITableInfoService
     {
         try
         {
+            //Talbes and Columns
             var tableColumnResponseList = _provider.FetchTablesAndColumns(
                 databaseConnectionInfo.Username,
                 databaseConnectionInfo.Password,
@@ -33,11 +34,23 @@ public class TableInfoService : ITableInfoService
                 databaseConnectionInfo.Database
             ).Result.ToList();
 
-            var tableInfoList = MapToCollection(tableColumnResponseList);
+            var tableInfoList = MapToTableInfoViewModelCollection(tableColumnResponseList);
+
+            //Table Relations
+            var relationsResponseList = _provider.FetchTablesRelations(
+                databaseConnectionInfo.Username,
+                databaseConnectionInfo.Password,
+                databaseConnectionInfo.Host,
+                databaseConnectionInfo.Port,
+                databaseConnectionInfo.Database
+            ).Result.ToList();
+
+            var relationList = MapToTableRelationViewModelsCollection(relationsResponseList);
 
             var databaseReturnObject = new DatabaseInfoViewModel
             {
                 Name = databaseConnectionInfo.Database,
+                Relations = relationList,
                 Tables = tableInfoList
             };
 
@@ -62,7 +75,8 @@ public class TableInfoService : ITableInfoService
     /// </summary>
     /// <param name="tableColumnList">List of TableColumnInfo filled with data from the database</param>
     /// <returns>A mapped object of TableInfo</returns>
-    private static Collection<TableInfoViewModel> MapToCollection(List<TableColumnInfo> tableColumnList)
+    private static Collection<TableInfoViewModel> MapToTableInfoViewModelCollection(
+        List<TableColumnInfo> tableColumnList)
     {
         var tableInfoList = new Collection<TableInfoViewModel>();
         foreach (var result in tableColumnList)
@@ -92,5 +106,23 @@ public class TableInfoService : ITableInfoService
         }
 
         return tableInfoList;
+    }
+
+    private static Collection<TableRelationViewModel> MapToTableRelationViewModelsCollection(
+        List<TableRelation> tableRelation)
+    {
+        var mappedList = new Collection<TableRelationViewModel>();
+
+        foreach (var item in tableRelation)
+            mappedList.Add(new TableRelationViewModel
+            {
+                ChildTable = item.ChildTable,
+                ChildColumn = item.ChildColumn,
+                ParentTable = item.ParentTable,
+                ParentColumn = item.ParentColumn,
+                ConnectionName = item.ConnectionName
+            });
+
+        return mappedList;
     }
 }

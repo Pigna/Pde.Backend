@@ -7,4 +7,6 @@ public class DatabaseInfoViewModel
     public string Name { get; set; } = null!;
 
     public Collection<TableInfoViewModel> Tables { get; set; } = null!;
+
+    public Collection<TableRelationViewModel> Relations { get; set; } = null!;
 }

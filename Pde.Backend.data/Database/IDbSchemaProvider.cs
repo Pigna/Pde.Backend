@@ -7,4 +7,8 @@ public interface IDbSchemaProvider
     public Task<IEnumerable<TableColumnInfo>> FetchTablesAndColumns(string username, string password, string host,
         string port,
         string database);
+
+    public Task<IEnumerable<TableRelation>> FetchTablesRelations(string username, string password,
+        string host,
+        string port, string database);
 }
