@@ -60,14 +60,8 @@ public class PostgresSchemaProvider : IDbSchemaProvider
     public async Task<IEnumerable<TableColumnInfo>> FetchTablesAndColumns(string username, string password, string host,
         string port, string database)
     {
-        //TODO: duplicate
-        var connectionString = $@"
-            User ID={username};
-            Password={password};
-            Host={host};
-            Port={port};
-            Database={database};
-        ";
+        var connectionString = CreateConnectionString(username, password, host, port, database);
+
         using var databaseConnection = _connectionFactory.Connect(connectionString);
         var queryResult = await databaseConnection.QueryAsync<dynamic>(StrPostgresCommandTablesAndColumns);
         return queryResult.Select(item => new TableColumnInfo
@@ -82,14 +76,8 @@ public class PostgresSchemaProvider : IDbSchemaProvider
         string host,
         string port, string database)
     {
-        //TODO: Duplicate
-        var connectionString = $@"
-            User ID={username};
-            Password={password};
-            Host={host};
-            Port={port};
-            Database={database};
-        ";
+        var connectionString = CreateConnectionString(username, password, host, port, database);
+
         using var databaseConnection = _connectionFactory.Connect(connectionString);
         var queryResult = await databaseConnection.QueryAsync<dynamic>(StrPostgresCommandTableRelations);
         return queryResult.Select(item => new TableRelation
@@ -100,5 +88,17 @@ public class PostgresSchemaProvider : IDbSchemaProvider
             ParentColumn = item.parent_column,
             ConnectionName = item.conname
         });
+    }
+
+    private static string CreateConnectionString(string username, string password, string host, string port,
+        string database)
+    {
+        return $@"
+            User ID={username};
+            Password={password};
+            Host={host};
+            Port={port};
+            Database={database};
+        ";
     }
 }
