@@ -25,7 +25,7 @@ public class TableInfoService : ITableInfoService
     {
         try
         {
-            //Talbes and Columns
+            //Tables and Columns
             var tableColumnResponseList = _provider.FetchTablesAndColumns(
                 databaseConnectionInfo.Username,
                 databaseConnectionInfo.Password,
@@ -84,7 +84,10 @@ public class TableInfoService : ITableInfoService
             var column = new ColumnInfoViewModel
             {
                 Name = result.ColumnName,
-                DataType = result.DataType
+                DataType = result.DataType,
+                Default = result.ColumnDefault,
+                IsNullable = result.IsNullable,
+                Constraints = MapConstraintViewModel(result.Constraints)
             };
             var foundTable = tableInfoList.FirstOrDefault(i => i.Name == result.TableName);
             if (foundTable != null)
@@ -124,5 +127,29 @@ public class TableInfoService : ITableInfoService
             });
 
         return mappedList;
+    }
+
+    private static Collection<ConstraintViewModel> MapConstraintViewModel(ICollection<Constraint> constraints)
+    {
+        var mappedConstraints = new Collection<ConstraintViewModel>();
+        foreach (var constraint in constraints)
+        {
+            var constraintViewModel = new ConstraintViewModel
+            {
+                Name = constraint.Name
+            };
+
+            if (constraint.Type == "UNIQUE")
+                constraintViewModel.Type = ConstraintType.Unique;
+            else if (constraint.Type == "PRIMARY KEY")
+                constraintViewModel.Type = ConstraintType.Primary;
+            else if (constraint.Type == "FOREIGN KEY")
+                constraintViewModel.Type = ConstraintType.Foreign;
+            else if (constraint.Type == "CHECK")
+                constraintViewModel.Type = ConstraintType.Check;
+            mappedConstraints.Add(constraintViewModel);
+        }
+
+        return mappedConstraints;
     }
 }
