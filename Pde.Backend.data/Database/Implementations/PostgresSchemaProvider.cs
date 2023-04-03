@@ -41,33 +41,21 @@ public class PostgresSchemaProvider : IDbSchemaProvider
 
     private const string StrPostgresCommandTableRelations = @"
         SELECT 
-            cl2.relname as child_table,
-	        att2.attname as child_column, 
-            cl.relname as parent_table, 
-            att.attname as parent_column,
-            conname
+	        --foreign key
+	        conf.table_name AS fk_table,
+	        conf.column_name AS fk_column,
+	        ref.constraint_name AS fk_constraint_name,
+	        --prmary key
+	        conp.table_name AS pk_table,
+	        conp.column_name AS pk_column,
+	        ref.unique_constraint_name AS pk_constraint_name,
+	        ref.constraint_name || ref.unique_constraint_name as X
         FROM
-           (SELECT 
-                unnest(con1.conkey) as parent, 
-                unnest(con1.confkey) as child, 
-                con1.confrelid, 
-                con1.conrelid,
-                con1.conname
-            FROM 
-                pg_class cl
-                JOIN pg_namespace ns ON cl.relnamespace = ns.oid
-                JOIN pg_constraint con1 ON con1.conrelid = cl.oid
-            WHERE
-	         con1.contype = 'f'
-           ) con
-           JOIN pg_attribute att ON
-               att.attrelid = con.confrelid AND att.attnum = con.child
-           JOIN pg_class cl ON
-               cl.oid = con.confrelid
-           JOIN pg_attribute att2 ON
-               att2.attrelid = con.conrelid AND att2.attnum = con.parent
-	        JOIN pg_class cl2 ON
-	        cl2.oid = con.conrelid 
+	        information_schema.REFERENTIAL_CONSTRAINTS ref
+        JOIN
+	        information_schema.key_column_usage conf ON ref.constraint_name = conf.constraint_name
+        JOIN
+	        information_schema.key_column_usage conp ON ref.unique_constraint_name = conp.constraint_name
     ";
 
     private readonly IDbConnectionFactory _connectionFactory;
@@ -87,11 +75,12 @@ public class PostgresSchemaProvider : IDbSchemaProvider
         var queryResult = await databaseConnection.QueryAsync<dynamic>(StrPostgresCommandTableRelations);
         return queryResult.Select(item => new TableRelation
         {
-            ChildTable = item.child_table,
-            ChildColumn = item.child_column,
-            ParentTable = item.parent_table,
-            ParentColumn = item.parent_column,
-            ConnectionName = item.conname
+            ForeignKeyTable = item.fk_table,
+            ForeignKeyColumn = item.fk_column,
+            ForeignKeyConstraintName = item.fk_constraint_name,
+            PrimaryKeyTable = item.pk_table,
+            PrimaryKeyColumn = item.pk_column,
+            PrimaryKeyConstraintName = item.pk_constraint_name
         });
     }
 

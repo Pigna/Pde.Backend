@@ -119,11 +119,12 @@ public class TableInfoService : ITableInfoService
         foreach (var item in tableRelation)
             mappedList.Add(new TableRelationViewModel
             {
-                ChildTable = item.ChildTable,
-                ChildColumn = item.ChildColumn,
-                ParentTable = item.ParentTable,
-                ParentColumn = item.ParentColumn,
-                ConnectionName = item.ConnectionName
+                ForeignKeyTable = item.ForeignKeyTable,
+                ForeignKeyColumn = item.ForeignKeyColumn,
+                ForeignKeyConstraintName = item.ForeignKeyConstraintName,
+                PrimaryKeyTable = item.PrimaryKeyTable,
+                PrimaryKeyColumn = item.PrimaryKeyColumn,
+                PrimaryKeyConstraintName = item.PrimaryKeyConstraintName
             });
 
         return mappedList;

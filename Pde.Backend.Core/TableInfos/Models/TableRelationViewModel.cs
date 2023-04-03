@@ -2,9 +2,11 @@ namespace Pde.Backend.Core.TableInfos.Models;
 
 public class TableRelationViewModel
 {
-    public string ChildTable { get; set; }
-    public string ChildColumn { get; set; }
-    public string ParentTable { get; set; }
-    public string ParentColumn { get; set; }
-    public string ConnectionName { get; set; }
+    public string ForeignKeyTable { get; set; }
+    public string ForeignKeyColumn { get; set; }
+
+    public string ForeignKeyConstraintName { get; set; }
+    public string PrimaryKeyTable { get; set; }
+    public string PrimaryKeyColumn { get; set; }
+    public string PrimaryKeyConstraintName { get; set; }
 }
