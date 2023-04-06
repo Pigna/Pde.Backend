@@ -26,19 +26,6 @@ public class PostgresSchemaProvider : IDbSchemaProvider
         ORDER BY col.table_name, col.ordinal_position;
 ";
 
-    private const string easyselect = @"
-        SELECT 
-            main.conrelid as fkey_conrelid,
-            main.conname as fkey,
-            main.confrelid as fkey_confrelid,
-            relation.conrelid as pkey_conrelid,
-            relation.conname as pkey
-	    FROM
-	       pg_constraint main
-	    JOIN pg_constraint relation on main.confrelid = relation.conrelid
-	    where relation.contype = 'p'
-	";
-
     private const string StrPostgresCommandTableRelations = @"
         SELECT 
 	        --foreign key
@@ -69,7 +56,7 @@ public class PostgresSchemaProvider : IDbSchemaProvider
         string host,
         string port, string database)
     {
-        var connectionString = CreateConnectionString(username, password, host, port, database);
+        var connectionString = _connectionFactory.CreateConnectionString(username, password, host, port, database);
 
         using var databaseConnection = _connectionFactory.Connect(connectionString);
         var queryResult = await databaseConnection.QueryAsync<dynamic>(StrPostgresCommandTableRelations);
@@ -88,7 +75,7 @@ public class PostgresSchemaProvider : IDbSchemaProvider
         string host,
         string port, string database)
     {
-        var connectionString = CreateConnectionString(username, password, host, port, database);
+        var connectionString = _connectionFactory.CreateConnectionString(username, password, host, port, database);
 
         using var databaseConnection = _connectionFactory.Connect(connectionString);
         var queryResult = (await databaseConnection.QueryAsync<dynamic>(StrPostgresCommandFetchTablesColumns)).ToList();
@@ -136,17 +123,5 @@ public class PostgresSchemaProvider : IDbSchemaProvider
         }
 
         return mappedResults;
-    }
-
-    private static string CreateConnectionString(string username, string password, string host, string port,
-        string database)
-    {
-        return $@"
-            User ID={username};
-            Password={password};
-            Host={host};
-            Port={port};
-            Database={database};
-        ";
     }
 }
