@@ -1,22 +1,36 @@
+using Dapper;
+
 namespace Pde.Backend.Data.Database.Implementations;
 
 public class PostgresExportProvider : IDbExportProvider
 {
-    public object FetchTableData(string tableName, ICollection<string> columns,
+    private readonly IDbConnectionFactory _connectionFactory;
+
+    public PostgresExportProvider(IDbConnectionFactory connectionFactory)
+    {
+        _connectionFactory = connectionFactory;
+    }
+
+    public async Task<object> FetchTableData(
+        string tableName,
+        ICollection<string> columns,
         string username,
         string password,
         string host,
         string port,
         string database)
     {
-        Console.WriteLine(asd(tableName, columns));
-        return null;
+        var sqlSelectQuery = CreateSqlQuery(tableName, columns);
+        var connectionString = _connectionFactory.CreateConnectionString(username, password, host, port, database);
+        using var databaseConnection = _connectionFactory.Connect(connectionString);
+        var queryResult = await databaseConnection.QueryAsync<dynamic>(sqlSelectQuery);
+        return queryResult;
     }
 
-    private string asd(string tableName, ICollection<string> columns)
+    private string CreateSqlQuery(string tableName, ICollection<string> columns)
     {
-        //TODO: How does this handle a list>?
-        var selectQuery = @$"SELECT {columns} FROM {tableName} ";
+        var preparedColumns = string.Join(",", columns);
+        var selectQuery = @$"SELECT {preparedColumns} FROM {tableName} ";
         return selectQuery;
     }
 }

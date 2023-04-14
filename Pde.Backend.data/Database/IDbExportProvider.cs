@@ -2,7 +2,8 @@ namespace Pde.Backend.Data.Database;
 
 public interface IDbExportProvider
 {
-    object FetchTableData(string tableName, ICollection<string> columns,
+    Task<object> FetchTableData(string tableName,
+        ICollection<string> columns,
         string username,
         string password,
         string host,

@@ -2,6 +2,7 @@ namespace Pde.Backend.Core.TableInfos.Models;
 
 public enum FakeDataType
 {
+    Null,
     Account,
     Amount,
     Avatar,
