@@ -16,4 +16,8 @@
       <ProjectReference Include="..\Pde.Backend.Data\Pde.Backend.Data.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="TableInfos\Models\TableData\" />
+    </ItemGroup>
+
 </Project>

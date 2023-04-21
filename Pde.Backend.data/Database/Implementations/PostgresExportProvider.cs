@@ -1,4 +1,5 @@
 using Dapper;
+using Pde.Backend.Data.Models;
 
 namespace Pde.Backend.Data.Database.Implementations;
 
@@ -11,7 +12,7 @@ public class PostgresExportProvider : IDbExportProvider
         _connectionFactory = connectionFactory;
     }
 
-    public async Task<object> FetchTableData(
+    public async Task<TableData> FetchTableData(
         string tableName,
         ICollection<string> columns,
         string username,
@@ -23,14 +24,28 @@ public class PostgresExportProvider : IDbExportProvider
         var sqlSelectQuery = CreateSqlQuery(tableName, columns);
         var connectionString = _connectionFactory.CreateConnectionString(username, password, host, port, database);
         using var databaseConnection = _connectionFactory.Connect(connectionString);
-        var queryResult = await databaseConnection.QueryAsync<dynamic>(sqlSelectQuery);
-        return queryResult;
+        var queryResult = (await databaseConnection.QueryAsync<dynamic>(sqlSelectQuery)).ToList();
+
+        var data = new List<IDictionary<string, object>>();
+
+        foreach (var row in queryResult)
+        {
+            var item = row as IDictionary<string, object>;
+            data.Add(item!);
+        }
+
+        var tableData = new TableData
+        {
+            TableName = tableName,
+            Data = data
+        };
+        return tableData;
     }
 
-    private string CreateSqlQuery(string tableName, ICollection<string> columns)
+    private static string CreateSqlQuery(string tableName, ICollection<string> columns)
     {
-        var preparedColumns = string.Join(",", columns);
-        var selectQuery = @$"SELECT {preparedColumns} FROM {tableName} ";
+        var preparedColumns = string.Join(",", columns.Select(columnName => $"\"{columnName}\""));
+        var selectQuery = @$"SELECT {preparedColumns} FROM ""{tableName}"";";
         return selectQuery;
     }
 }

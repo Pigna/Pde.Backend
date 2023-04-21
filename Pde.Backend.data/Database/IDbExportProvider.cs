@@ -1,8 +1,10 @@
+using Pde.Backend.Data.Models;
+
 namespace Pde.Backend.Data.Database;
 
 public interface IDbExportProvider
 {
-    Task<object> FetchTableData(string tableName,
+    Task<TableData> FetchTableData(string tableName,
         ICollection<string> columns,
         string username,
         string password,

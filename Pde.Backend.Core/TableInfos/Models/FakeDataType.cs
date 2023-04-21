@@ -4,6 +4,7 @@ public enum FakeDataType
 {
     Null,
     Account,
+    Number,
     Amount,
     Avatar,
     BuildingNumber,
@@ -21,6 +22,7 @@ public enum FakeDataType
     Latitude,
     Longitude,
     Month,
+    MonthNumber,
     Password,
     PhoneNumber,
     Picture,

@@ -13,96 +13,84 @@ public class FakeDataService : IFakeDataService
     /// <returns>FetchFakeDataResponse with Result as Success or Failed and Value as the requested data. </returns>
     public FetchFakeDataResponse FetchFakeData(FetchFakeDataRequest request)
     {
-        var faker = new Faker();
         var response = new FetchFakeDataResponse
         {
-            Result = FetchFakeDataResult.Success
+            Result = FetchFakeDataResult.Success,
+            Value = GetFakerDataByType(request.Type, 0)
         };
-        switch (request.Type)
+
+
+        return response;
+    }
+
+    public object GetFakerDataByType(FakeDataType requestType, int seed)
+    {
+        var faker = new Faker();
+        faker.Random = new Randomizer(seed);
+        switch (requestType)
         {
             case FakeDataType.Account:
-                response.Value = faker.Finance.Account();
-                break;
+                return faker.Finance.Account();
             case FakeDataType.Amount:
-                response.Value = faker.Finance.Amount();
-                break;
+                return faker.Finance.Amount();
+            case FakeDataType.Number:
+                return faker.Finance.Random.Number(0, 100);
             case FakeDataType.Avatar:
                 //TODO: Avatar or profile picture
                 break;
             case FakeDataType.BuildingNumber:
-                response.Value = faker.Address.BuildingNumber();
-                break;
+                return faker.Address.BuildingNumber();
             case FakeDataType.City:
-                response.Value = faker.Address.City();
-                break;
+                return faker.Address.City();
             case FakeDataType.Country:
-                response.Value = faker.Address.Country();
-                break;
+                return faker.Address.Country();
             case FakeDataType.CreditCardNumber:
-                response.Value = faker.Finance.CreditCardNumber();
-                break;
+                return faker.Finance.CreditCardNumber();
             case FakeDataType.DateFuture:
-                response.Value = faker.Date.Future();
-                break;
+                return faker.Date.Future();
             case FakeDataType.DatePast:
-                response.Value = faker.Date.Past();
-                break;
+                return faker.Date.Past();
             case FakeDataType.Email:
-                response.Value = faker.Internet.Email();
-                break;
+                return faker.Internet.Email();
             case FakeDataType.FirstName:
-                response.Value = faker.Name.FirstName();
-                break;
+                return faker.Name.FirstName();
             case FakeDataType.FullAddress:
-                response.Value = faker.Address.FullAddress();
-                break;
+                return faker.Address.FullAddress();
             case FakeDataType.FullName:
-                response.Value = faker.Name.FullName();
-                break;
+                return faker.Name.FullName();
             case FakeDataType.Iban:
-                response.Value = faker.Finance.Iban();
-                break;
+                return faker.Finance.Iban();
             case FakeDataType.LastName:
-                response.Value = faker.Name.LastName();
-                break;
+                return faker.Name.LastName();
             case FakeDataType.Latitude:
-                response.Value = faker.Address.Latitude();
-                break;
+                return faker.Address.Latitude();
             case FakeDataType.Longitude:
-                response.Value = faker.Address.Longitude();
-                break;
+                return faker.Address.Longitude();
             case FakeDataType.Month:
-                response.Value = faker.Date.Month();
-                break;
+                return faker.Date.Month();
+            case FakeDataType.MonthNumber:
+                return faker.Random.Number(1, 12);
             case FakeDataType.Password:
-                response.Value = faker.Internet.Password();
-                break;
+                return faker.Internet.Password();
             case FakeDataType.PhoneNumber:
-                response.Value = faker.Phone.PhoneNumber();
-                break;
+                return faker.Phone.PhoneNumber();
             case FakeDataType.Picture:
-                response.Value = faker.Image.PicsumUrl();
-                break;
+                return faker.Image.PicsumUrl();
             case FakeDataType.State:
-                response.Value = faker.Address.State();
-                break;
+                return faker.Address.State();
             case FakeDataType.StreetAddress:
-                response.Value = faker.Address.StreetAddress();
-                break;
+                return faker.Address.StreetAddress();
             case FakeDataType.StreetName:
-                response.Value = faker.Address.StreetName();
-                break;
+                return faker.Address.StreetName();
             case FakeDataType.UserName:
-                response.Value = faker.Internet.UserName();
-                break;
+                return faker.Internet.UserName();
             case FakeDataType.Zipcode:
-                response.Value = faker.Address.ZipCode();
-                break;
+                return faker.Address.ZipCode();
+            case FakeDataType.Null:
             default:
-                response.Result = FetchFakeDataResult.Fail;
-                break;
+                return null!;
         }
 
-        return response;
+        return null!;
     }
 }
