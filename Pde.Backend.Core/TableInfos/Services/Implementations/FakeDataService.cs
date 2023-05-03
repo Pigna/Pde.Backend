@@ -25,8 +25,10 @@ public class FakeDataService : IFakeDataService
 
     public object GetFakerDataByType(FakeDataType requestType, int seed)
     {
-        var faker = new Faker();
-        faker.Random = new Randomizer(seed);
+        var faker = new Faker
+        {
+            Random = new Randomizer(seed)
+        };
         switch (requestType)
         {
             case FakeDataType.Account:

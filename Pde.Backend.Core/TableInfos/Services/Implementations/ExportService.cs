@@ -43,8 +43,11 @@ public class ExportService : IExportService
             //TODO: Check if there is actual data to insert.
             foreach (var row in tableData.Data)
             {
+                //TODO: What to do if a seed is a string?
+                var firstValue = row!.FirstOrDefault().Value;
+                var seed = Convert.ToInt32(firstValue);
                 foreach (var column in columnsToAdd)
-                    row?.Add(column.ColumnName, _fakeDataService.GetFakerDataByType(column.DataType, 0));
+                    row?.Add(column.ColumnName, _fakeDataService.GetFakerDataByType(column.DataType, seed));
             }
 
             tableDataResult.Add(tableData);
