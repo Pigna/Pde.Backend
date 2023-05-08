@@ -10,9 +10,9 @@ public static class ServiceCollectionExtensions
 {
     public static void AddPdeBackendCoreServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddTransient<IExportService, ExportService>();
+        services.AddTransient<IExportService, HttpExportService>();
         services.AddTransient<ITableInfoService, TableInfoService>();
-        services.AddTransient<IFakeDataService, FakeDataService>();
+        services.AddHttpClient<HttpExportService>();
         services.AddDependencies(configuration);
     }
 

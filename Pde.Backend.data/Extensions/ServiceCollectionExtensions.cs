@@ -9,7 +9,6 @@ public static class ServiceCollectionExtensions
 {
     public static void AddPdeBackendDataServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddTransient<IDbExportProvider, PostgresExportProvider>();
         services.AddTransient<IDbConnectionFactory, PostgresConnectionFactory>();
         services.AddTransient<IDbSchemaProvider, PostgresSchemaProvider>();
         services.AddDependencies(configuration);

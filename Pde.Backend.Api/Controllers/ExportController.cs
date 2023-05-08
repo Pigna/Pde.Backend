@@ -19,6 +19,6 @@ public class ExportController : ControllerBase
     public async Task<OkObjectResult> SubmitExportData([FromBody] SubmitExportDataRequest request,
         CancellationToken cancellationToken)
     {
-        return Ok(_exportService.SubmitExportData(request));
+        return Ok(await _exportService.SubmitExportData(request));
     }
 }

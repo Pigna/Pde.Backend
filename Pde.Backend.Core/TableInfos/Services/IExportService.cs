@@ -4,5 +4,5 @@ namespace Pde.Backend.Core.TableInfos.Services;
 
 public interface IExportService
 {
-    SubmitExportResponse SubmitExportData(SubmitExportDataRequest request);
+    Task<SubmitExportResponse> SubmitExportData(SubmitExportDataRequest request);
 }
